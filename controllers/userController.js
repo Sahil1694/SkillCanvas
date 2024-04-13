@@ -135,7 +135,7 @@ export const updateprofilepicture = catchAsyncError(async(req,res,next)=>{
 
 
     const fileUri = getDataUri(file);
-    const mycloud = await cloudinary.uploader.upload(fileUri.content); 
+    const mycloud = await cloudinary.v2.uploader.upload(fileUri.content); 
 
     //delete exixting user
     await cloudinary.v2.uploader.destroy(user.avatar.public_id);
