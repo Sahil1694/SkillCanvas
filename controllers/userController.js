@@ -127,31 +127,44 @@ export const updateProfile = catchAsyncError(async(req,res,next)=>{
  })
 })
 
-export const updateprofilepicture = catchAsyncError(async(req,res,next)=>{
-
-
+export const updateprofilepicture = catchAsyncError(async (req, res, next) => {
+  try {
     const file = req.file;
-    const user = await User.findById(req.user._id)
+    if (!file) {
+      return res.status(400).json({ success: false, message: "No file uploaded" });
+    }
+
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
 
     const fileUri = getDataUri(file);
-    const mycloud = await cloudinary.v2.uploader.upload(fileUri.content); 
+    const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
 
-    //delete exixting user
-    await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+    // Delete existing user avatar on Cloudinary
+    if (user.avatar && user.avatar.public_id) {
+      await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+    }
 
+    // Update user's avatar details
     user.avatar = {
       public_id: mycloud.public_id,
       url: mycloud.secure_url,
     };
 
     await user.save();
-     
-    
-  res.status(200).json({
-    success:true,
-    message:"Profile Picture Updated Successfully",
-  })
-})
+
+    res.status(200).json({
+      success: true,
+      message: "Profile Picture Updated Successfully",
+    });
+  } catch (error) {
+    // Handle any errors
+    console.error("Error updating profile picture:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
 
 export const forgetPassword = catchAsyncError(async(req,res,next)=>{
   const {email} = req.body;
