@@ -131,8 +131,7 @@ export const updateprofilepicture = catchAsyncError(async(req,res,next)=>{
 
 
     const file = req.file;
-    const user = await User.findById(req.user._id).select("+password")
-
+    const user = await User.findById(req.user._id)
 
     const fileUri = getDataUri(file);
     const mycloud = await cloudinary.v2.uploader.upload(fileUri.content); 
@@ -246,16 +245,15 @@ export const addToPlayList = catchAsyncError(async (req, res, next) => {
 
 
 
-export const removeFromPlaylist = catchAsyncError(async(req,res,next)=>{
+export const removeFromPlaylist = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.user._id);
 
   const course = await Course.findById(req.query.id);
 
   if (!course) return next(new ErrorHandler("Invalid Course Id", 404));
 
-  const newPlaylist = user.playlist.filter(items=>{
-    if(item.course.toString() !== course._id.toString()) return item;
-  })
+  // Corrected filter condition and variable name
+  const newPlaylist = user.playlist.filter(item => item.course.toString() !== course._id.toString());
 
   user.playlist = newPlaylist;
 
@@ -263,9 +261,10 @@ export const removeFromPlaylist = catchAsyncError(async(req,res,next)=>{
 
   res.status(200).json({
     success: true,
-    message: "Removed from  playlist",
+    message: "Removed from playlist",
   });
-})
+});
+
 
 
 
