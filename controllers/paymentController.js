@@ -48,7 +48,6 @@ export const buySubscription = catchAsyncError(async (req, res, next) => {
     const subscription_id = user.subscription.id;
     
 
-    //should be equal to razorpay signature
     const generated_signature = crypto.createHmac(
         "sha256",
         process.env.RAZOR_API_SECRET

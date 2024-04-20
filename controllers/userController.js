@@ -5,7 +5,7 @@ import { sendToken } from "../utils/sendToken.js"
 import { sendEmail } from "../utils/sendEmail.js"
 import crypto from "crypto";
 import {Course} from "../models/Course.js"
-import cloudinary from "cloudinary";
+import {v2 as cloudinary} from 'cloudinary';
 import getDataUri from "../utils/dataUri.js"
 import {Stats} from "../models/Stats.js"
 
@@ -140,11 +140,11 @@ export const updateprofilepicture = catchAsyncError(async (req, res, next) => {
     }
 
     const fileUri = getDataUri(file);
-    const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
+    const mycloud = await cloudinary.uploader.upload(fileUri.content);
 
     // Delete existing user avatar on Cloudinary
     if (user.avatar && user.avatar.public_id) {
-      await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+      await cloudinary.uploader.destroy(user.avatar.public_id);
     }
 
     // Update user's avatar details
