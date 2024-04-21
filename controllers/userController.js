@@ -138,15 +138,15 @@ export const updateprofilepicture = catchAsyncError(async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found" });
     }
-
-    const fileUri = getDataUri(file);
-    const mycloud = await cloudinary.uploader.upload(fileUri.content);
-
     // Delete existing user avatar on Cloudinary
     if (user.avatar && user.avatar.public_id) {
       await cloudinary.uploader.destroy(user.avatar.public_id);
     }
 
+    const fileUri = getDataUri(file);
+    const mycloud = await cloudinary.uploader.upload(fileUri.content);
+
+    
     // Update user's avatar details
     user.avatar = {
       public_id: mycloud.public_id,
@@ -317,7 +317,7 @@ export const deleteUser = catchAsyncError(async(req,res,next)=>{
   
   if(!user) return next(new ErrorHandler("User not found",404));
 
-  await cloudinary.v2.uploader.destroy(user.avatar.public_id)
+  await cloudinary.uploader.destroy(user.avatar.public_id)
   //Cancel Subscrition 
   await user.deleteOne();
    
