@@ -8,7 +8,6 @@ This repository contains the backend code for SkillCanvas Website that allows us
 - [Technologies Used](#technologies-used)
 - [Environment Variables](#environment-variables)
 - [Setup Instructions](#setup-instructions)
-- [License](#license)
 
 ## Folder Structure
 
