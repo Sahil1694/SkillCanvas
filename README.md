@@ -1,6 +1,6 @@
-# Backend for Course Subscription & Management System
+# Backend for SkillCanvas Website
 
-This repository contains the backend code for a course subscription and management system that allows users to register, log in, purchase subscriptions, manage playlists, and more. Admins can manage courses, payments, and users through API endpoints.
+This repository contains the backend code for SkillCanvas Website that allows users to register, log in, purchase subscriptions, manage playlists, and more. Admins can manage courses, payments, and users through API endpoints.
 
 ## Table of Contents
 - [Folder Structure](#folder-structure)
@@ -12,6 +12,7 @@ This repository contains the backend code for a course subscription and manageme
 
 ## Folder Structure
 
+```bash
 ├── Config
 │   ├── Config.env        # Stores all environment variables
 │   └── Database.js       # Database connection setup
@@ -43,8 +44,11 @@ This repository contains the backend code for a course subscription and manageme
 ├── App.js                # Main application file (express app)
 └── Server.js             # Server configuration and startup
 
+```
+
 ## API Endpoints
 
+```bash
 ├── User APIs
 │   ├── POST /api/v1/register           # Register a new user
 │   ├── POST /api/v1/login              # Log in
@@ -80,8 +84,11 @@ This repository contains the backend code for a course subscription and manageme
 │   ├── POST /api/v1/course-request     # Send a course request form email
 │   ├── GET /api/v1/admin/stats         # Get dashboard statistics (admin only)
 
+```
+
 ## Technologies Used
 
+```bash
 - **Node.js** - Backend runtime
 - **Express.js** - Web framework for Node.js
 - **MongoDB** - Database
@@ -94,9 +101,11 @@ This repository contains the backend code for a course subscription and manageme
 - **Multer** - For handling file uploads
 - **Node-Cron** - For scheduling tasks (monthly stats)
 - **Validator** - For data validation
+```
 
 ## Environment Variables
 
+```bash
 You will need to set the following environment variables in a `.env` file:
 
 PORT=5000  
@@ -116,9 +125,15 @@ SMTP_USER=<Your SMTP username>
 SMTP_PASS=<Your SMTP password>  
 MY_MAIL=<Your email to receive contact forms>  
 REFUND_DAYS=<Number of days to allow refunds>
-
+```
 ## Setup Instructions
 
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
+```bash
+├── Clone the repository:
+│   └── git clone <repository-url>
+├── Install the dependencies:
+│   └── npm install
+├── Create a `.env` file and configure the environment variables as mentioned above.
+└── Start the server:
+    └── npm run dev
+```
