@@ -42,7 +42,7 @@ This repository contains the backend code for a course subscription and manageme
 │   ├── SendEmail.js       # Utility function to send emails
 │   └── SendToken.js       # Utility function to set JWT token in cookie
 ├── App.js                # Main application file (express app)
-└── Server.js             # Server configuration and startup ```
+└── Server.js             # Server configuration and startup 
 ...
 
 ## API Endpoints
