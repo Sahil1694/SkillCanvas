@@ -7,10 +7,8 @@ import { Stats } from "../models/Stats.js";
 
 
 
-
+//get All Courses
 export const getAllCourses = catchAsyncError(async(req , res , next) =>{
-
-
   const keyword = req.query.keyword || "";
   const category = req.query.category || "";
 
@@ -32,6 +30,8 @@ export const getAllCourses = catchAsyncError(async(req , res , next) =>{
 });
 
 
+
+//create Courses
 export const createCourse = catchAsyncError(async (req, res, next) => {
    const { title, description, category, createdBy } = req.body;
  

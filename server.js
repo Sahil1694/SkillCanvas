@@ -7,7 +7,6 @@
 
  
  connectDB();
-
  cloudinary.config({
    cloud_name: process.env.CLOUDINARY_CLIENT_NAME, 
    api_key: process.env.CLOUDINARY_CLIENT_API, 
