@@ -7,7 +7,8 @@
 .env.test.local
 .env.production.local
 .env
-config/.env
+*.env
+
 
 
 # Logs
